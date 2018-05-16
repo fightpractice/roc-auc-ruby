@@ -1,7 +1,7 @@
 class RocAuc
   # author vietlami
 
-  def planar_arr(a,b)
+  def self.planar_arr(a,b)
     if a.length == b.length
       arr = []
       length = a.length
@@ -15,10 +15,10 @@ class RocAuc
     end
   end
 
-  def tied_rank(x)
+  def self.tied_rank(x)
     r = []
     range_x = x.each_with_index.collect{|item,index| index if r << 0}
-    sorted_x = planar_arr(x,range_x).sort_by{|x|x[0]}
+    sorted_x = self.planar_arr(x,range_x).sort_by{|x|x[0]}
     cur_val = sorted_x[0][0]
     last_rank = 0
     0.upto(sorted_x.length-1).each do |i|
@@ -43,8 +43,8 @@ class RocAuc
   end
 
 
-  def auc(actual, posterior)
-    r = tied_rank(posterior)
+  def self.auc(actual, posterior)
+    r = self.tied_rank(posterior)
     positive_actual = actual.collect{|item| item==1 ? item : ""}
     positive_actual.delete("")
     num_positive = positive_actual.length
